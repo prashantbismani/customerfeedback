@@ -5,18 +5,20 @@ import {
   Routes,
   Navigate
 } from "react-router-dom";
-// import CustomerFeedback from "./pages/CustomerFeedback.jsx";
 import SignIn from "./pages/SignIn.jsx";
+import Admin from "./pages/Admin.jsx";
+import GuestFeedBack from "./pages/GuestFeedBack.jsx";
 import PageNotFound from "./pages/PageNotFound.jsx";
 import "./App.css";
-import { Reddit } from "@mui/icons-material";
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route exact path="/" element={<SignIn />} />
-        <Route path="*" element={<Navigate to='/' replace />} />
+        <Route path="/" element={<SignIn />}/>
+        <Route exact path="/admin/review" element={<Admin />} />
+        <Route exact path="/guest/feedback" element={<GuestFeedBack />} />
+        <Route path="*" element={<Navigate to='/' replace/>} />
         {/* <Redirect path="*" element={<PageNotFound/>} /> */}
       </Routes>
     </Router>

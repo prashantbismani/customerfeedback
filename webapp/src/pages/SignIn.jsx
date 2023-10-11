@@ -9,11 +9,13 @@ import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
+import { useNavigate } from 'react-router-dom';
 
-export default function SignIn() {
-  const handleSubmit = (event) => {
-    console.log(event)
-  };
+const SignIn = () => {
+
+  const navigate = useNavigate();
+  const handleAdminLogin = () => navigate('/admin/review')
+  const handleGuestLogin = () => navigate('/guest/feedback')
 
   return (
     <Container component="main" maxWidth="xs">
@@ -32,11 +34,12 @@ export default function SignIn() {
         <Typography component="h1" variant="h5">
           Sign in as
         </Typography>
-        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+        <Box component="form" noValidate sx={{ mt: 1 }}>
           <Button
             sx={{ mt: 3, mr: 2, mb: 13 }}
             variant="outlined"
             startIcon={<AccountCircleIcon />}
+            onClick={handleGuestLogin}
           >
             Guest
           </Button>
@@ -44,6 +47,7 @@ export default function SignIn() {
             sx={{ mt: 3, mb: 13 }}
             variant="contained"
             startIcon={<ManageAccountsIcon />}
+            onClick={handleAdminLogin}
           >
             Admin
           </Button>
@@ -71,3 +75,5 @@ function Copyright(props) {
     </Typography>
   );
 }
+
+export default SignIn
