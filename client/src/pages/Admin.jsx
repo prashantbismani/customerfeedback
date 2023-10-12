@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState, Suspense } from "react";
 import {
   Typography,
   List,
@@ -17,8 +17,25 @@ import SentimentDissatisfiedIcon from "@mui/icons-material/SentimentDissatisfied
 import SentimentSatisfiedIcon from "@mui/icons-material/SentimentSatisfied";
 import SentimentSatisfiedAltIcon from "@mui/icons-material/SentimentSatisfiedAltOutlined";
 import SentimentVerySatisfiedIcon from "@mui/icons-material/SentimentVerySatisfied";
+import AxiosHelper from "./helpers/axiosHelper";
+import LoadingIndicator from "./helpers/LoadingIndicator";
 
 const Admin = () => {
+  const [feedbackList, setFeedbackList] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    AxiosHelper.get("/feedback/getAll")
+      .then((response) => {
+        setFeedbackList(response.data);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching feedback data:", error);
+        setIsLoading(false);
+      });
+  }, []);
+
   const StyledRating = styled(Rating)(({ theme }) => ({
     "& .MuiRating-iconEmpty .MuiSvgIcon-root": {
       color: theme.palette.action.disabled,
@@ -53,48 +70,104 @@ const Admin = () => {
     },
   };
 
-  const feedbackList = [
-    {
-      name: "Prashant",
-      email: "prashant.bismani@gmail.com",
-      company: "BT",
-      comments:
-        "This product is amazing! It exceeded my expectations in terms of quality and performance.",
-      satisfaction: 5,
-    },
-    {
-      name: "Jay Shetty",
-      email: "jayshetty@hotmail.com",
-      company: "ABC Corp",
-      comments:
-        "The product is good, but it has a few minor issues that need improvement.",
-      satisfaction: 3,
-    },
-    {
-      name: "Simran Kaur",
-      email: "arun@gmail.com",
-      company: "Google Inc",
-      comments:
-        "I'm satisfied with this product, but the price is a bit high for what it offers.",
-      satisfaction: 4,
-    },
-    {
-      name: "Emily",
-      email: "emily@7-11.com",
-      company: "7-Eleven",
-      comments:
-        "The product arrived damaged, and the customer support was not very helpful.",
-      satisfaction: 2,
-    },
-    {
-      name: "Adil",
-      email: "adil@yahoo.com",
-      company: "Walmart",
-      comments:
-        "I expected more features from this product. It's somewhat disappointing.",
-      satisfaction: 2,
-    },
-  ];
+  // const feedbackList = [
+  //   {
+  //     name: "Prashant",
+  //     email: "prashant.bismani@gmail.com",
+  //     company: "BT",
+  //     comments:
+  //       "This product is amazing! It exceeded my expectations in terms of quality and performance.",
+  //     satisfaction: 5,
+  //   },
+  //   {
+  //     name: "Jay Shetty",
+  //     email: "jayshetty@hotmail.com",
+  //     company: "ABC Corp",
+  //     comments:
+  //       "The product is good, but it has a few minor issues that need improvement.",
+  //     satisfaction: 3,
+  //   },
+  //   {
+  //     name: "Simran Kaur",
+  //     email: "arun@gmail.com",
+  //     company: "Google Inc",
+  //     comments:
+  //       "I'm satisfied with this product, but the price is a bit high for what it offers.",
+  //     satisfaction: 4,
+  //   },
+  //   {
+  //     name: "Emily",
+  //     email: "emily@7-11.com",
+  //     company: "7-Eleven",
+  //     comments:
+  //       "The product arrived damaged, and the customer support was not very helpful.",
+  //     satisfaction: 2,
+  //   },
+  //   {
+  //     name: "Adil",
+  //     email: "adil@yahoo.com",
+  //     company: "Walmart",
+  //     comments:
+  //       "I expected more features from this product. It's somewhat disappointing.",
+  //     satisfaction: 2,
+  //   },
+  // ];
+
+  const renderList = () => (
+    <List
+      id="feedbackList"
+      sx={{ width: "100%", maxWidth: "97%", bgcolor: "background.paper" }}
+    >
+      {feedbackList.map((feedback, index) => (
+        <Grid id={`container-${index}`}>
+          <ListItem alignItems="flex-start">
+            <ListItemAvatar>
+              <Avatar alt={feedback.name} src="/static/images/avatar/1.jpg" />
+            </ListItemAvatar>
+            <ListItemText
+              primary={feedback.name}
+              sx={{ color: "rgb(15 105 17)" }}
+              secondary={
+                <React.Fragment>
+                  <Typography
+                    sx={{ display: "inline" }}
+                    component="span"
+                    variant="body2"
+                    color="#100202"
+                  >
+                    {feedback.company}
+                  </Typography>
+                  <Typography
+                    sx={{ display: "inline", ml: 1, color: "rgb(4 65 120)" }}
+                    component="span"
+                    variant="body2"
+                  >
+                    {feedback.email}
+                  </Typography>
+
+                  <Grid
+                    sx={{ display: "flex", "justify-content": "space-between" }}
+                  >
+                    {feedback.comments}
+                    <StyledRating
+                      name="highlight-selected-only"
+                      value={feedback.satisfaction}
+                      readOnly
+                      sx={{ ml: 2 }}
+                      IconContainerComponent={ItemContainer}
+                      getLabelText={(value) => customIcons[value].label}
+                      highlightSelectedOnly
+                    />
+                  </Grid>
+                </React.Fragment>
+              }
+            />
+          </ListItem>
+          <Divider id={`divider-${index}`} variant="inset" component="li" />
+        </Grid>
+      ))}
+    </List>
+  );
 
   return (
     <React.Fragment>
@@ -111,60 +184,11 @@ const Admin = () => {
         >
           Customer Feedback
         </Typography>
-        <List
-          id="feedbackList"
-          sx={{ width: "100%", maxWidth: "97%", bgcolor: "background.paper" }}
-        >
-          {feedbackList.map((feedback, index) => (
-            <Grid id={`container-${index}`}>
-              <ListItem alignItems="flex-start">
-                <ListItemAvatar>
-                  <Avatar
-                    alt={feedback.name}
-                    src="/static/images/avatar/1.jpg"
-                  />
-                </ListItemAvatar>
-                <ListItemText
-                  primary={feedback.name}
-                  sx={{color: 'rgb(15 105 17)'}}
-                  secondary={
-                    <React.Fragment>
-                      <Typography
-                        sx={{ display: "inline" }}
-                        component="span"
-                        variant="body2"
-                        color="#100202"
-                      >
-                        {feedback.company}
-                      </Typography>
-                      <Typography
-                        sx={{ display: "inline", ml: 1, color: "rgb(4 65 120)"}}
-                        component="span"
-                        variant="body2"
-                      >
-                        {feedback.email}
-                      </Typography>
-
-                      <Grid sx={{ display: "flex", "justify-content": "space-between"}}>
-                        {feedback.comments}
-                        <StyledRating
-                          name="highlight-selected-only"
-                          value={feedback.satisfaction}
-                          readOnly 
-                          sx={{ ml: 2 }}
-                          IconContainerComponent={ItemContainer}
-                          getLabelText={(value) => customIcons[value].label}
-                          highlightSelectedOnly
-                        />
-                      </Grid>
-                    </React.Fragment>
-                  }
-                />
-              </ListItem>
-              <Divider id={`divider-${index}`} variant="inset" component="li" />
-            </Grid>
-          ))}
-        </List>
+        {isLoading ? (
+          <LoadingIndicator />
+        ) : (
+          renderList()
+        )}
       </Paper>
     </React.Fragment>
   );

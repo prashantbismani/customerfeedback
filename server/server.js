@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const session = require('express-session');
 const path = require('path');
+const cors = require('cors');
 
 const app = express();
 
@@ -44,6 +45,9 @@ app.use(
 // Passport middleware
 app.use(passport.initialize());
 app.use(passport.session());
+
+// Configure CORS
+app.use(cors()); // This enables CORS for all routes
 
 // Routes
 app.use('/feedback', require('./routes/feedbackRoutes'));
