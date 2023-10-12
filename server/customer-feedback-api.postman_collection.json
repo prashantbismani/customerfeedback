@@ -1,0 +1,65 @@
+{
+	"info": {
+		"_postman_id": "aa149ba5-1d8e-413c-99c1-86a4cc80782a",
+		"name": "customer-feedback-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12002936"
+	},
+	"item": [
+		{
+			"name": "feedback/submit",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Prashant\",\n    \"email\": \"prashant.bismani@gmail.com\",\n    \"company\": \"BT\",\n    \"comments\": \"This product is amazing! It exceeded my expectations in terms of quality and performance.\",\n    \"satisfaction\": 5\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/feedback/submit",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"feedback",
+						"submit"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/feedback/getAll",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8080/feedback/getAll",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"feedback",
+						"getAll"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

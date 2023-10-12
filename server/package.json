@@ -1,0 +1,31 @@
+{
+    "name": "customer-feedback-api",
+    "version": "0.0.1",
+    "description": "Customer Feedback API",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node server.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/prashantbismani/customerfeedback.git"
+    },
+    "author": "Prashant Bismani",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/prashantbismani/customerfeedback/issues"
+    },
+    "homepage": "https://github.com/prashantbismani/customerfeedback#readme",
+    "dependencies": {
+        "bcryptjs": "^2.4.3",
+        "dotenv": "^8.2.0",
+        "ejs": "^3.1.5",
+        "express": "^4.17.1",
+        "express-ejs-layouts": "^2.5.0",
+        "express-session": "^1.17.1",
+        "mongoose": "^5.11.8",
+        "passport": "^0.4.1",
+        "passport-local": "^1.0.0"
+    }
+}
