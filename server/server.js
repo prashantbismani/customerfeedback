@@ -8,7 +8,6 @@ const cors = require('cors');
 
 const app = express();
 
-const HOST = process.env.HOST || '127.0.0.1';
 const PORT = process.env.PORT || 8080;
 
 app.use(express.static(path.join(__dirname, 'public')));
@@ -52,6 +51,6 @@ app.use(cors()); // This enables CORS for all routes
 // Routes
 app.use('/feedback', require('./routes/feedbackRoutes'));
 
-app.listen(PORT, HOST, () => {
-  console.log(`Server is running on http://${HOST}:${PORT}`);
+app.listen(PORT, () => {
+  console.log(`Server is running on ${PORT}`);
 });
