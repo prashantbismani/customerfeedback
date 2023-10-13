@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Suspense } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Typography,
   List,
@@ -69,49 +69,6 @@ const Admin = () => {
       label: "Very Satisfied",
     },
   };
-
-  // const feedbackList = [
-  //   {
-  //     name: "Prashant",
-  //     email: "prashant.bismani@gmail.com",
-  //     company: "BT",
-  //     comments:
-  //       "This product is amazing! It exceeded my expectations in terms of quality and performance.",
-  //     satisfaction: 5,
-  //   },
-  //   {
-  //     name: "Jay Shetty",
-  //     email: "jayshetty@hotmail.com",
-  //     company: "ABC Corp",
-  //     comments:
-  //       "The product is good, but it has a few minor issues that need improvement.",
-  //     satisfaction: 3,
-  //   },
-  //   {
-  //     name: "Simran Kaur",
-  //     email: "arun@gmail.com",
-  //     company: "Google Inc",
-  //     comments:
-  //       "I'm satisfied with this product, but the price is a bit high for what it offers.",
-  //     satisfaction: 4,
-  //   },
-  //   {
-  //     name: "Emily",
-  //     email: "emily@7-11.com",
-  //     company: "7-Eleven",
-  //     comments:
-  //       "The product arrived damaged, and the customer support was not very helpful.",
-  //     satisfaction: 2,
-  //   },
-  //   {
-  //     name: "Adil",
-  //     email: "adil@yahoo.com",
-  //     company: "Walmart",
-  //     comments:
-  //       "I expected more features from this product. It's somewhat disappointing.",
-  //     satisfaction: 2,
-  //   },
-  // ];
 
   const renderList = () => (
     <List

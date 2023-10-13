@@ -1,5 +1,4 @@
-import * as React from "react";
-import { useState } from "react";
+import React, { useState }from "react";
 import {
   Grid,
   Typography,
@@ -28,7 +27,7 @@ export default function GuestFeedBack() {
     email: "",
     company: "",
     comments: "",
-    satisfaction: 3, // Default rating
+    satisfaction: 3
   });
   const [isSnackbarOpen, setSnackbarOpen] = useState(false);
 
@@ -43,7 +42,7 @@ export default function GuestFeedBack() {
   const handleSend = async () => {
     setIsLoading(true);
     AxiosHelper.post("/feedback/submit", feedback)
-      .then((response) => {
+      .then(() => {
         setFeedback({
           name: "",
           email: "",
@@ -124,7 +123,6 @@ export default function GuestFeedBack() {
               "margin-top": "12px",
               "font-weight": "550",
               "font-size": "1.4rem",
-             
             }}
             onChange={handleChange}
           >

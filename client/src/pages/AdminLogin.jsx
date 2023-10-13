@@ -35,9 +35,10 @@ const AdminLogin = () => {
       password: credentials.password,
     })
       .then((response) => {
-        console.log(response);
         setIsLoading(false);
-        if (response.status == 200 && response.data.role == "admin") {
+        console.log(response.success);
+        console.log(response.data.role == "admin")
+        if (response.success && response.data.role == "admin") {
           navigate("/admin/review");
         } else {
           setSnackbarOpen(true)
@@ -62,7 +63,6 @@ const AdminLogin = () => {
             <Stack sx={{ width: "100%" }} spacing={2}>
               <Alert
                 open={isSnackbarOpen}
-                autoHideDuration={3000} // Adjust the duration as needed
                 onClose={() => setSnackbarOpen(false)}
               >
                 Invalid Admin Username or Password!

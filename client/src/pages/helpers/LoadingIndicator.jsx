@@ -11,10 +11,6 @@ const LoadingIndicator = () => {
         "padding-bottom": "20px",
         "padding-top": "20px"
       }}
-    //   sx={{
-    //     mt: 4,
-    //     mb: 4,
-    //   }}
     >
       <CircularProgress color="secondary" size={20} sx={{
         "margin-right": "10px"
@@ -25,7 +21,6 @@ const LoadingIndicator = () => {
       <CircularProgress color="inherit" size={20} sx={{
         "margin-right": "10px"
       }}/>
-      {/* <LinearProgress color="secondary" /> */}
     </Box>
   );
 };
