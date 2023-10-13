@@ -8,7 +8,8 @@ import {
 import SignIn from "./pages/SignIn.jsx";
 import Admin from "./pages/Admin.jsx";
 import GuestFeedBack from "./pages/GuestFeedBack.jsx";
-import PageNotFound from "./pages/PageNotFound.jsx";
+import AdminLogin from "./pages/AdminLogin.jsx"
+// import PageNotFound from "./pages/PageNotFound.jsx";
 import "./App.css";
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
         <Route path="/" element={<SignIn />}/>
         <Route exact path="/admin/review" element={<Admin />} />
         <Route exact path="/guest/feedback" element={<GuestFeedBack />} />
+        <Route exact path="/admin/login" element={<AdminLogin />} />
         <Route path="*" element={<Navigate to='/' replace/>} />
         {/* <Redirect path="*" element={<PageNotFound/>} /> */}
       </Routes>

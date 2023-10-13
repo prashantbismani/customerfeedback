@@ -14,7 +14,7 @@ import { useNavigate } from 'react-router-dom';
 const SignIn = () => {
 
   const navigate = useNavigate();
-  const handleAdminLogin = () => navigate('/admin/review')
+  const handleAdminLogin = () => navigate('/admin/login')
   const handleGuestLogin = () => navigate('/guest/feedback')
 
   return (

@@ -50,6 +50,8 @@ app.use(cors()); // This enables CORS for all routes
 
 // Routes
 app.use('/feedback', require('./routes/feedbackRoutes'));
+app.use('/user', require('./routes/UserRoutes'));
+
 
 app.listen(PORT, () => {
   console.log(`Server is running on ${PORT}`);
