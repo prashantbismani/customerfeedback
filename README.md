@@ -1,7 +1,14 @@
 # Getting Started with Create React App
+Both UI(under client) and API( under server) are in the single repo.
 
-UI Source code is under webapp ()
-API Source code is under server (Deployed Server Instance: https://customer-feedback-api.onrender.com)
+UI Folder: https://github.com/prashantbismani/customerfeedback/tree/main/client
+API Folder: https://github.com/prashantbismani/customerfeedback/tree/main/server 
+
+I've hosted an apps here,
+UI : https://customer-feedback-ui.onrender.com
+API : https://customer-feedback-api.onrender.com
+
+Contact: prashant.bismani@gmail.com
 
 ## Available Scripts
 
