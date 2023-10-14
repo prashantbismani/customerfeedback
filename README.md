@@ -5,7 +5,7 @@ UI Folder: https://github.com/prashantbismani/customerfeedback/tree/main/client 
 API Folder: https://github.com/prashantbismani/customerfeedback/tree/main/server
 
 I've hosted apps here,\
-UI : https://customer-feedback-ui.onrender.com\
+UI : https://customer-feedback-ui.onrender.com \
 API : https://customer-feedback-api.onrender.com
 
 Contact: prashant.bismani@gmail.com
