@@ -1,5 +1,15 @@
 import React, { useState } from "react";
-import { TextField, Avatar, Button, Card, Box, Grid, Stack, Alert } from "@mui/material";
+import CryptoJS from "crypto-js";
+import {
+  TextField,
+  Avatar,
+  Button,
+  Card,
+  Box,
+  Grid,
+  Stack,
+  Alert,
+} from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
@@ -24,29 +34,23 @@ const AdminLogin = () => {
   };
 
   const handleAdminLogin = () => {
-    // Encrypt the data (e.g., password)
-    // const encryptedPassword = CryptoJS.AES.encrypt(
-    //   password,
-    //   secretKey
-    // ).toString();
+    const encryptedPassword = CryptoJS.SHA256(credentials.password).toString();
     setIsLoading(true);
     AxiosHelper.post("/user/login", {
       username: credentials.username,
-      password: credentials.password,
+      password: encryptedPassword,
     })
-      .then((response) => {
+      .then(response => {
         setIsLoading(false);
-        console.log(response.success);
-        console.log(response.data.role == "admin")
-        if (response.success && response.data.role == "admin") {
+        if (response.success && response.data.role === "admin") {
           navigate("/admin/review");
         } else {
-          setSnackbarOpen(true)
+          setSnackbarOpen(true);
         }
       })
-      .catch((error) => {
+      .catch(error => {
         setIsLoading(false);
-        setSnackbarOpen(true)
+        setSnackbarOpen(true);
         console.error(error);
       });
   };
@@ -58,17 +62,14 @@ const AdminLogin = () => {
 
   return (
     <Container component="main" maxWidth="xs">
-      <Grid sx={{ marginRight: 1, marginLeft: 3, mt: 1, position: "absolute"}}>
-      {isSnackbarOpen && (
-            <Stack sx={{ width: "100%" }} spacing={2}>
-              <Alert
-                open={isSnackbarOpen}
-                onClose={() => setSnackbarOpen(false)}
-              >
-                Invalid Admin Username or Password!
-              </Alert>
-            </Stack>
-          )}
+      <Grid sx={{ marginRight: 1, marginLeft: 3, mt: 1, position: "absolute" }}>
+        {isSnackbarOpen && (
+          <Stack sx={{ width: "100%" }} spacing={2}>
+            <Alert open={isSnackbarOpen} onClose={() => setSnackbarOpen(false)}>
+              Invalid Admin Username or Password!
+            </Alert>
+          </Stack>
+        )}
       </Grid>
       <Card
         sx={{
@@ -87,65 +88,66 @@ const AdminLogin = () => {
         </Typography>
 
         {isLoading ? (
-            <LoadingIndicator />
-          ) : (
-        <Box component="form" noValidate sx={{ mt: 1, mb: 2 }}>
-          <Grid container spacing={3} m={3}>
-            <Grid item xs={12} sm={10}>
-              <TextField
-                required
-                id="username"
-                name="username"
-                label="Username"
-                fullWidth
-                size="small"
-                autoComplete="off"
-                variant="outlined"
-                onChange={handleChange}
-              />
+          <LoadingIndicator />
+        ) : (
+          <Box component="form" noValidate sx={{ mt: 1, mb: 2 }}>
+            <Grid container spacing={3} m={3}>
+              <Grid item xs={12} sm={10}>
+                <TextField
+                  required
+                  id="username"
+                  name="username"
+                  label="Username"
+                  fullWidth
+                  size="small"
+                  autoComplete="off"
+                  variant="outlined"
+                  onChange={handleChange}
+                />
+              </Grid>
+              <Grid item xs={12} sm={10}>
+                <TextField
+                  required
+                  id="password"
+                  name="password"
+                  label="Password"
+                  type="password"
+                  fullWidth
+                  size="small"
+                  autoComplete="off"
+                  variant="outlined"
+                  onChange={handleChange}
+                />
+              </Grid>
             </Grid>
-            <Grid item xs={12} sm={10}>
-              <TextField
-                required
-                id="password"
-                name="password"
-                label="Password"
-                type="password"
-                fullWidth
-                size="small"
-                autoComplete="off"
+            <Grid
+              container
+              sx={{
+                display: "flex",
+                "justify-content": "center",
+              }}
+            >
+              <Button
+                sx={{ mt: 3, mr: 2, mb: 3 }}
                 variant="outlined"
-                onChange={handleChange}
-              />
+                startIcon={<AccountCircleIcon />}
+                onClick={handleCancel}
+              >
+                Cancel
+              </Button>
+              <Button
+                sx={{ mt: 3, mb: 3 }}
+                variant="contained"
+                startIcon={<ManageAccountsIcon />}
+                onClick={handleAdminLogin}
+              >
+                Login
+              </Button>
             </Grid>
-          </Grid>
-          <Grid
-            container
-            sx={{
-              display: "flex",
-              "justify-content": "center",
-            }}
-          >
-            <Button
-              sx={{ mt: 3, mr: 2, mb: 3 }}
-              variant="outlined"
-              startIcon={<AccountCircleIcon />}
-              onClick={handleCancel}
-            >
-              Cancel
-            </Button>
-            <Button
-              sx={{ mt: 3, mb: 3 }}
-              variant="contained"
-              startIcon={<ManageAccountsIcon />}
-              onClick={handleAdminLogin}
-            >
-              Login
-            </Button>
-          </Grid>
-        </Box> ) }
+          </Box>
+        )}
       </Card>
-      <Grid mt = {30} ml={2}>
+      <Grid mt={30} ml={2}>
         Test: Username - prashant, password - 123abc
       </Grid>
     </Container>

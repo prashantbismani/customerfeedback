@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 const BASE_URL = 'https://customer-feedback-api.onrender.com';
+// const  BASE_URL = 'http://127.0.0.1:8080' //local
 
 const api = axios.create({
   baseURL: BASE_URL,
